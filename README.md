@@ -31,4 +31,58 @@ py -3 -m venv .venv
 # If PowerShell blocks scripts:
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
+```
+4) Install packages:
+ ```powershell
+   python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+5)Run the app: 
+```powershell
+python run_gui.py
+```
+## How to use
+
+Click Browse File or Browse Folder
+
+(Optional) tick Dry-run to preview what would be wiped
+
+Choose Passes and Pattern
+
+Click Wipe
+
+Outputs are saved in Certificates/<RUN_ID>/. Keys are created in Keys/ on first run.
+## Verify the certificate
+```powershell
+python tools\verify_cert.py `
+  --json Certificates\<RUN_ID>\certificate.json `
+  --sig  Certificates\<RUN_ID>\certificate.json.sig `
+  --pub  Keys\public.pem
+```
+You should see VALID and the SHA-256 of the JSON.
+The PDF (if created) is just a readable summary.
+
+## Notes & limits
+
+HDD vs SSD: Overwrites are reliable on HDDs. On SSDs, wear-leveling/TRIM means overwrites may not purge old cells. For strict purge, use device Secure Erase/Crypto Erase (not included).
+
+In-use files: If a file is open/locked (e.g., OneDrive/Office), close the app or pause sync and try again.
+
+Paths: Don’t point at system folders or drive roots. Use Dry-run first.
+
+## Project layout
+```bash
+SecureSnap/
+├─ app/gui.py           # Tkinter GUI
+├─ securesnap/wipe.py   # File/folder wiping
+├─ securesnap/certs.py  # Keys, signed JSON, optional PDF
+├─ securesnap/utils.py  # Guardrails, cipher /w helper
+├─ tools/verify_cert.py # Verifier (JSON + sig)
+├─ run_gui.py
+├─ requirements.txt
+└─ LICENSE
+```
+## License 
+MIT
+
 
