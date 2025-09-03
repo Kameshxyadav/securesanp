@@ -1,0 +1,26 @@
+{
+  "id": "26277ef2-d20b-4507-879e-8a8f575af20b",
+  "tool": {
+    "name": "SecureSnap Wiper",
+    "version": "1.0.1"
+  },
+  "host": {
+    "computer": "KhalidKashmeeri",
+    "os": "Windows-11-10.0.26100-SP0"
+  },
+  "targets": [
+    {
+      "path": "C:\\Users\\kames\\OneDrive\\Documents\\hey",
+      "type": "file"
+    }
+  ],
+  "summary": {
+    "files": 2,
+    "folders": 1,
+    "total_bytes_overwritten": 29366,
+    "failed": []
+  },
+  "start_time_utc": "2025-09-01T13:31:28.593090",
+  "end_time_utc": "2025-09-01T13:31:28.629079",
+  "status": "success"
+}
